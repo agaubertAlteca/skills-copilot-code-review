@@ -2,6 +2,10 @@
 MongoDB database configuration and setup for Mergington High School API
 """
 
+import hashlib
+import secrets
+from datetime import datetime, timedelta, timezone
+
 from pymongo import MongoClient
 from argon2 import PasswordHasher, exceptions as argon2_exceptions
 
@@ -10,6 +14,8 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['mergington_high']
 activities_collection = db['activities']
 teachers_collection = db['teachers']
+announcements_collection = db['announcements']
+sessions_collection = db['sessions']
 
 # Methods
 
@@ -38,6 +44,7 @@ def verify_password(hashed_password: str, plain_password: str) -> bool:
 
 def init_database():
     """Initialize database if empty"""
+    sessions_collection.create_index("expires_at", expireAfterSeconds=0)
 
     # Initialize activities if empty
     if activities_collection.count_documents({}) == 0:
@@ -49,6 +56,44 @@ def init_database():
         for teacher in initial_teachers:
             teachers_collection.insert_one(
                 {"_id": teacher["username"], **teacher})
+
+    if announcements_collection.count_documents({}) == 0:
+        announcements_collection.insert_one({
+            "_id": "welcome-announcement",
+            "message": "Welcome to Mergington High School. Check here for the latest announcements.",
+            "expiration_date": "2099-12-31",
+            "created_by": "principal",
+        })
+
+
+def create_session(username: str) -> str:
+    """Create a server-side session and return its opaque bearer token."""
+    token = secrets.token_urlsafe(32)
+    token_hash = hashlib.sha256(token.encode("utf-8")).hexdigest()
+    sessions_collection.insert_one({
+        "_id": token_hash,
+        "username": username,
+        "expires_at": datetime.now(timezone.utc) + timedelta(hours=12),
+    })
+    return token
+
+
+def get_session_teacher(token: str):
+    """Return the teacher for a valid, unexpired session token."""
+    token_hash = hashlib.sha256(token.encode("utf-8")).hexdigest()
+    session = sessions_collection.find_one({
+        "_id": token_hash,
+        "expires_at": {"$gt": datetime.now(timezone.utc)},
+    })
+    if not session:
+        return None
+    return teachers_collection.find_one({"_id": session["username"]})
+
+
+def revoke_session(token: str) -> None:
+    """Revoke a session token."""
+    token_hash = hashlib.sha256(token.encode("utf-8")).hexdigest()
+    sessions_collection.delete_one({"_id": token_hash})
 
 
 # Initial database if empty

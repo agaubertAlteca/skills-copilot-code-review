@@ -23,11 +23,23 @@
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
+            <button id="manage-announcements-button" class="icon-button" type="button">
+              <span aria-hidden="true">📣</span>
+              <span>Announcements</span>
+            </button>
             <button id="logout-button">Logout</button>
           </div>
         </div>
       </div>
     </header>
+
+    <div id="announcement-banner" class="announcement-banner hidden" role="region" aria-label="Current announcements" aria-live="polite">
+      <div class="announcement-banner-heading">
+        <span aria-hidden="true">📣</span>
+        <strong>Announcements</strong>
+      </div>
+      <div id="announcement-banner-list" class="announcement-banner-list"></div>
+    </div>
 
     <main>
       <section id="activities-container">
@@ -131,6 +143,51 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <div id="announcement-manager-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-content announcement-modal-content" role="dialog" aria-modal="true" aria-labelledby="announcement-dialog-title">
+        <div class="announcement-dialog-header">
+          <div>
+            <p class="announcement-dialog-eyebrow">School updates</p>
+            <h2 id="announcement-dialog-title">Manage announcements</h2>
+          </div>
+          <button id="close-announcement-manager" class="announcement-close-button" type="button" aria-label="Close announcements">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="announcement-toolbar">
+          <p id="announcement-count" aria-live="polite">Loading announcements...</p>
+          <button id="new-announcement-button" type="button">+ New announcement</button>
+        </div>
+        <p id="announcement-feedback" class="announcement-feedback hidden" role="status" aria-live="polite"></p>
+
+        <div class="announcement-manager-layout">
+          <div id="managed-announcements" class="managed-announcements" aria-live="polite"></div>
+          <div id="announcement-form-placeholder" class="announcement-form-placeholder">
+            <span aria-hidden="true">✎</span>
+            <p>Select an announcement to edit, or create a new one.</p>
+          </div>
+          <form id="announcement-form" class="announcement-form hidden">
+            <h3 id="announcement-form-title">New announcement</h3>
+            <label for="announcement-message">Message</label>
+            <textarea id="announcement-message" rows="4" maxlength="500" required></textarea>
+            <p class="announcement-field-hint">Up to 500 characters.</p>
+
+            <label for="announcement-start-date">Start date <span>(optional)</span></label>
+            <input id="announcement-start-date" type="date" />
+
+            <label for="announcement-expiration-date">Expiration date</label>
+            <input id="announcement-expiration-date" type="date" required />
+
+            <div class="announcement-form-actions">
+              <button id="cancel-announcement-edit" class="announcement-secondary-button hidden" type="button">Cancel</button>
+              <button id="save-announcement-button" type="submit">Publish announcement</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 

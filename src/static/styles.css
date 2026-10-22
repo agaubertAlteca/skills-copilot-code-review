@@ -664,3 +664,294 @@ footer {
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
+
+.announcement-banner {
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  background: var(--warning-light);
+  border-left: 4px solid var(--warning);
+  border-radius: 4px;
+  color: var(--text-primary);
+}
+
+.announcement-banner-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  color: var(--primary);
+}
+
+.announcement-banner-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 6px 0;
+}
+
+.announcement-banner-item + .announcement-banner-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.announcement-banner-message {
+  overflow-wrap: anywhere;
+}
+
+.announcement-banner-expiration {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.announcement-modal-content {
+  width: min(92vw, 900px);
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.announcement-dialog-header,
+.announcement-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.announcement-dialog-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.announcement-dialog-eyebrow {
+  margin-bottom: 4px;
+  color: var(--secondary-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.announcement-dialog-header h2 {
+  color: var(--primary);
+  font-size: 1.35rem;
+}
+
+.announcement-close-button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--background);
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+}
+
+.announcement-toolbar {
+  margin: 16px 0 12px;
+}
+
+.announcement-toolbar p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.announcement-manager-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.9fr);
+  align-items: start;
+  gap: 16px;
+}
+
+.managed-announcements {
+  display: grid;
+  gap: 10px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.managed-announcement,
+.announcement-form,
+.announcement-form-placeholder,
+.announcement-empty-state {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+.managed-announcement-header,
+.managed-announcement-actions,
+.announcement-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.managed-announcement h3,
+.announcement-form h3 {
+  color: var(--primary);
+  font-size: 0.98rem;
+}
+
+.managed-announcement-message {
+  margin: 10px 0 7px;
+  overflow-wrap: anywhere;
+}
+
+.managed-announcement-dates {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+}
+
+.announcement-state {
+  padding: 3px 7px;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.announcement-state-active {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.announcement-state-scheduled {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.announcement-state-expired {
+  background: var(--background);
+  color: var(--text-secondary);
+}
+
+.managed-announcement-actions {
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+.announcement-delete-button {
+  background: var(--error-light);
+  color: var(--error);
+}
+
+.announcement-form-placeholder {
+  display: grid;
+  min-height: 180px;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.announcement-form-placeholder span {
+  color: var(--secondary-dark);
+  font-size: 1.6rem;
+}
+
+.announcement-form {
+  display: grid;
+  gap: 8px;
+}
+
+.announcement-form h3 {
+  margin-bottom: 4px;
+}
+
+.announcement-form label {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.announcement-form label span,
+.announcement-field-hint {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 400;
+}
+
+.announcement-form textarea,
+.announcement-form input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.announcement-form textarea {
+  resize: vertical;
+}
+
+.announcement-form textarea:focus,
+.announcement-form input:focus {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 1px;
+}
+
+.announcement-form-actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.announcement-secondary-button {
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.announcement-feedback {
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: var(--info-light);
+  color: var(--info);
+  font-size: 0.84rem;
+}
+
+.announcement-feedback.error {
+  background: var(--error-light);
+  color: var(--error);
+}
+
+.announcement-feedback.success {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.announcement-empty-state {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  #user-controls {
+    position: static;
+    margin-top: 10px;
+  }
+
+  #user-info {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .announcement-manager-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .announcement-modal-content {
+    padding: 18px;
+  }
+
+  .managed-announcements {
+    max-height: 32vh;
+  }
+}
